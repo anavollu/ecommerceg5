@@ -1,0 +1,145 @@
+.borda{
+	border: 1px solid black;
+}
+
+
+/* CABEÇALHO (igual para todos) */
+header{
+	border-bottom: 5px solid black;
+	padding: 11px;
+	background-color: blue;
+}
+
+.icon-logo{
+	width: 30px;
+}
+
+.icon-carrinho{
+	width: 30px;
+}
+
+.trinca{
+	float: right;
+	margin: 8px;
+}
+
+.text-nav{
+	text-decoration: none;
+	font-size: 20px;
+	font-family: sans-serif;
+	color: white;
+}
+
+/* CORPO */
+body{
+	background-color: #e5e5e0;
+	font-family: Helvetica, sans-serif;;
+}
+
+/* BOTÃO DE VOLTAR */
+
+.bt-voltar {
+  border-radius: 4px;
+  background-color: #e5e5e0;
+  border: none;
+  color: black;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 0 0 10px 0;
+}
+
+.bt-voltar span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.bt-voltar span:after {
+  content: none;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.bt-voltar:hover span {
+  padding-right: 25px;
+}
+
+.bt-voltar:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/* TÍTULO */
+h1{
+	font-size: 30px;
+	margin: 15px 0 20px 30px;
+}
+
+/* NOME E PRODUTO */
+.icon-produto{
+	width: 10%;
+	float: left;
+	padding: 20px;
+	margin-left: 26%;
+}
+
+.card-prod{
+	margin-left: 20%;
+	display: inline-block;
+}
+
+.card-nome{
+	margin: 40px 0 0;
+}
+
+/* AVALAÇÃO */
+.card-avalia{
+	margin: 30px 0 0 40%;
+}
+
+.star-checked{
+	float: left;
+	margin: 3px;
+	color: darkorange;
+}
+
+.texto-avalia{
+	clear: both;
+	float: left;
+}
+
+/* BTT de AVALIAR */
+.avaliar-btt{
+	background-color: #4CAF50;
+  	color: white;
+	padding: 14px 20px;
+	margin: 20px 0 70px 40px;
+	border: none;
+	cursor: pointer;
+	width: 20%;
+	clear: both;
+	float: left;
+	font-size: 140%;
+}
+
+.avaliar-btt:hover{
+	opacity: 0.8;
+}
+/* RODAPÉ */
+footer{
+	background-color: red;
+	border-top: 1px solid white;
+	width: 99.4%;
+	margin-top: 70px;
+	padding: 5px;
+	position: fixed;
+	bottom: 0;
+}

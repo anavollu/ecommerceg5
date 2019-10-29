@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Página de Acesso</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="reset.css">
+		<link rel="stylesheet" type="text/css" href="style(fabio-acesso).css">
+	</head>
+
+	<body>
+		<header>
+			<a href="home.html"><img class="icon-logo" src="https://cdn4.iconfinder.com/data/icons/pictype-free-vector-icons/16/home-512.png" alt="Ícone do logo"></a>
+			<a class="trinca" href=""><img alt="Ícone do carrinho" class="icon-carrinho" src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/shopping-cart-512.png"></a>
+			<a class="trinca text-nav" href="produtos.html">Produtos</a>
+			<a class="trinca text-nav" href="acesso.html">Acesso</a>
+		</header>
+		
+		<article class="card_login">
+			<h2>Já tem cadastro?</h2>
+			<form action="/action_page.php" method="post">
+				<div class="container-cadastrado">
+					<label class="tag-login" for="login"><b>Login</b></label>
+				    <input class="box-login" type="text" placeholder="Escreva login" name="login" id="login" required> <br>
+				    <label class="tag-psw" for="psw-login"><b>Senha</b></label>
+				    <input class="box-psw" type="password" placeholder="Escreva senha" name="psw" id="psw-login" required>
+				    <br>
+				    <button class="acessar-btt" type="submit">Acessar</button><br>
+				    <label for="lembrar">
+				    	<input type="checkbox" checked="checked" name="lembrar" id="lembrar"> Lembrar de mim
+				    </label>
+				</div>
+
+				<div class="container_cancel">
+				    <button type="button" class="cancelbtn">Cancelar</button>
+				    <span class="psw1"><a class="psw1" href="#">Esqueci a senha.</a></span>
+				</div>
+			</form>
+		</article>
+
+		<div class="vl"></div>
+
+		<article class="card_cadastrar">
+			<h2>Cadastrar-se</h2>
+			<form action="/action_page.php" method="post">
+				<div class="container-cadastrar">
+					<label class="name" for="name"><b>Nome</b></label>
+				    <input type="text" placeholder="Escreva nome" name="name" id="name" required> <br>
+				    <label class="psw2" for="psw-cadastrar"><b>Senha</b></label>
+				    <input type="password" placeholder="Escreva senha" name="psw" id="psw-cadastrar" required>
+				    <br>
+				    <label class="email" for="email"><b>E-mail</b></label>
+				    <input type="email" placeholder="Escreva e-mail" name="email" id="email" required>
+				    <br>
+				    <label class="cpf" for="cpf"><b>CPF</b></label>
+				    <input type="text" placeholder="Escreva CPF" name="cpf" id="cpf" required>
+				    <br>
+				    <button class="criarcontabtn" type="submit">Criar conta</button><br>
+				</div>
+			</form>
+		</article>
+	</body>
+	<footer>
+		&copy; AFF - Grupo 5 
+	</footer>
+
+</html>

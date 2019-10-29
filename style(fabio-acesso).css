@@ -1,0 +1,156 @@
+.borda{
+	border: 1px solid black;
+}
+
+
+/* CABEÇALHO (igual para todos) */
+header{
+	border-bottom: 5px solid black;
+	padding: 11px;
+	background-color: blue;
+}
+
+.icon-logo{
+	width: 30px;
+}
+
+.icon-carrinho{
+	width: 30px;
+}
+
+.trinca{
+	float: right;
+	margin: 8px;
+}
+
+.text-nav{
+	text-decoration: none;
+	font-size: 20px;
+	font-family: sans-serif;
+	color: white;
+}
+
+
+/* CORPO */
+body{
+	background-color: #e5e5e0;
+	font-family: Arial, Helvetica, sans-serif;;
+}
+
+
+/* CARD DE LOGIN */
+h2{
+	font-size: 40px;
+}
+
+.card_login, .card_cadastrar {
+	float: left;
+	margin: 100px 0 0 200px;
+	padding: 20px;
+}
+.tag-login{
+	margin-right: 7px;
+}
+
+
+/* Caixas de texto */
+input[type=text], input[type=password] , input[type=email] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+
+/* Todos os btts */
+.acessar-btt, .cancelbtn, .criarcontabtn {
+	background-color: #4CAF50;
+  	color: white;
+	padding: 14px 20px;
+	margin: 8px 0 20px 40px;
+	border: none;
+	cursor: pointer;
+	width: 40%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+
+/* Btt de cancelar */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+  float: left;
+}
+
+.container_cancel{
+	float: left;
+	width: 100%;
+}
+
+
+/* Container dos formulários de texto */
+.container-cadastrado, .container-cadastrar {
+	padding: 16px;
+	display: block;
+}
+
+span.psw1{
+	float: left;
+	margin: 16px 0 0 20px;
+	text-decoration: none;
+}
+
+a.psw1:hover{
+	text-decoration: none;
+}
+
+/* Mudando os estilos dos btt span e cancel numa tela menor */
+@media screen and (max-width: 300px) {
+	span.psw1{
+		display: block;
+		float: none;
+  }
+  .cancelbtn{
+		width: 40%;
+	}
+}
+
+
+/* LINHA VERTICAL */
+.vl{
+	border: 0.5px solid black;
+	height: 455px;
+	width: 0;
+	float: left;
+	margin: 50px 0 0 150px;
+}
+
+/* CARD CADASTRAR */
+.name{
+	margin-right: 2px;
+}
+
+.email{
+	margin-right: 1px;
+}
+
+.cpf{
+	margin-right: 15px;
+}
+
+
+/* RODAPÉ */
+footer{
+	background-color: red;
+	border-top: 1px solid white;
+	width: 99.2%;
+	margin-top: 70px;
+	padding: 5px;
+	float: left;
+	clear: both;
+}
