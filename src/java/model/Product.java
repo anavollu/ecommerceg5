@@ -4,19 +4,24 @@ import java.util.Objects;
 
 public class Product {
 
-    private int id;
+    private Long id;
     private String name;
     private String description;
-    private double price;
+    private Double price;
     private String imageUrl;
 
-   
+    public Product(String name, String description, Double price, String imageUrl) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -35,7 +40,7 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public double getPrice() {
         return price;
     }
@@ -43,7 +48,6 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
-   
 
     public String getImageUrl() {
         return imageUrl;
@@ -93,7 +97,5 @@ public class Product {
         }
         return true;
     }
-
-    
 
 }
