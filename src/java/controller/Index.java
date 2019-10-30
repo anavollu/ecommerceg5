@@ -2,41 +2,39 @@ package controller;
 
 import dao.ProductDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import model.Product;
 
+@WebServlet(name = "Index", urlPatterns = {"/"})
+public class Index extends HttpServlet {
 
-public class Pagina extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
+        res.setContentType("text/html;charset=UTF-8");
         
-        response.setContentType("text/html;charset=UTF-8");
         ProductDao productDao = new ProductDao();
-        int pagina = Integer.parseInt(request.getParameter("pagina"));
-        List<Product> listProducts = productDao.getAll(5, (pagina - 1));
-        request.setAttribute("lista", listProducts);
         
-        HttpSession sessao = request.getSession();
-        final int size = productDao.getSize();
-        request.setAttribute("pagina", request.getParameter("pagina"));
-        request.setAttribute("tamanhoTotal", size);
-        request.setAttribute("qtdeDePaginas", (size % 5 != 0? size / 5 + 1 : size/5));
+        int size = productDao.getSize();
+        req.setAttribute("productsSize", size);
         
-        RequestDispatcher despachante = getServletContext().getRequestDispatcher("/index2.jsp");
-        despachante.forward(request, response);
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-//            out.println(produtos.get(0).getDescription());
-        }
-    }
-    protected String displayProducts (){
+        List<Product> productList = productDao.getAll(5, 0);
+        req.setAttribute("productList", productList);
         
-        return "";
+        req.getRequestDispatcher("index.jsp").forward(req, res);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

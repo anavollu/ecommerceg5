@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.Product;
 
 public class ProductDao extends BasicDao {
@@ -85,6 +87,43 @@ public class ProductDao extends BasicDao {
             ex.printStackTrace();
             return 0;
         }
+    }
+    
+    public List<Product> getAll(int limit, int offset){
+        List<Product> productList = new ArrayList<>();
+        String sql = "select * from Product "
+                + " limit " + limit
+                + " offset " + offset + ";";
+        try {
+            PreparedStatement stmt = this.con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                Double price = rs.getDouble("price");
+                String imageUrl = rs.getString("imageUrl");
+                Product product = new Product(name, description, price, imageUrl);
+                product.setId(rs.getLong("id"));
+                productList.add(product);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return productList;
+    }
+    
+    public int getSize () {
+        try {
+            String sql = "select count(1) as count from Product;";
+            PreparedStatement stmt = this.con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                return rs.getInt("count");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 
 }
