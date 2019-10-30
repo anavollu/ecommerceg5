@@ -132,9 +132,14 @@ public class ProductDao extends BasicDao {
         }
         return list;
     }
-
-    public ArrayList<Product> listarTodos(int offset){
-        String sql = "SELECT * FROM product LIMIT 5 OFFSET " + offset + ";";
+    
+    public ArrayList<Product> listarPaginacao(int pg, int qtd){
+        int qtdProductsPerPage = qtd;
+        int inicio, fim;
+        
+        inicio = pg * qtdProductsPerPage - qtdProductsPerPage;
+        fim = qtdProductsPerPage;
+        String sql = "SELECT * FROM product LIMIT "+inicio +", "+fim+";";
         try {
             Statement st = this.con.createStatement();
             
@@ -167,7 +172,6 @@ public class ProductDao extends BasicDao {
            
             while(rs.next()){
                 return rs.getInt(1);
-                
             }
             
         } catch (Exception e) {

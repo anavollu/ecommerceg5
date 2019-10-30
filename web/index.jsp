@@ -142,15 +142,15 @@
 
 
     <nav class="container navbar fixed-top navbar-expand-md flex-nowrap navbar-new-top">
-        <a href="${pageContext.request.contextPath}" class="navbar-brand"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""/></a>
+        <a href="${pageContext.request.contextPath}" class="navbar-brand" title="Seu ecommerce"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""/></a>
         <ul class="nav navbar-nav mr-auto"></ul>
         <ul class="navbar-nav flex-row">
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/account/profile.jsp" class="nav-link px-2"><i class="far fa-2x fa-user-circle"></i></a>
+                <a href="${pageContext.request.contextPath}/account/profile.jsp" class="nav-link px-2" title="Acesse sua conta"><i class="far fa-2x fa-user-circle"></i></a>
             </li>
             
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/logout/" class="nav-link px-2"><i class="fas fa-2x fa-sign-out-alt"></i></a>
+                <a href="${pageContext.request.contextPath}/logout/" class="nav-link px-2" title="Sair"><i class="fas fa-2x fa-sign-out-alt"></i></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link px-2"></a>
@@ -250,15 +250,21 @@
                         
                         <hr>
                      <%
+                        int pg ;
+                        int qtdItemPerPage = 5; // define a quantidade de produtos por pagina
+                        if (request.getParameter("pg") == "" || request.getParameter("pg") == null) {
+                            pg = 1;
+                        }else{
+                            pg = Integer.parseInt(request.getParameter("pg"));
+                        }
                         ProductDao produtoDao = new ProductDao();
-                        ArrayList <Product> listProducts = produtoDao.listarTodos();
+                        //ArrayList <Product> listProducts = produtoDao.listarTodos();
+                        ArrayList <Product> listProducts = produtoDao.listarPaginacao(pg, qtdItemPerPage);
                         request.setAttribute("lista", listProducts);
                         int qtd = produtoDao.amountOfProducts();
-                        request.setAttribute("qtdProducts", qtd);
+                        pageContext.setAttribute("qtdProducts", qtd);
                     %>
                
-                            
-                            
                             <section class="grid">
                                 <c:forEach var="produto" items="${lista}" varStatus="numberItem" >
                                     <article>
@@ -273,11 +279,45 @@
                                     </article>
                                 </c:forEach>
                             </section>
+                    
+                    <style>
+                        .paginacao{
+                            text-align: center;
+                            text-align:center; 
+                            max-width: 100%;
                             
+                        }
+                        .paginacao div{
+                            margin:  auto;
+                        }
+                        .paginacao .btn{
+                            width: 50px;
+                            margin-right: 10px
+                        }
+                        
+                        
+                    </style>
+                    <hr>
+                    <div class="paginacao">
+                        <div >
+                            <%
+                                // faz o calculo de quantos botões deverão ser impressos na tela.
+                                // Foi necessário o artificio "(double) qtdItemPerPage" para que o arrendodamento para cima funcionasse.
+                                // Se temos 6 produtos, dividido por 5 itens por pagina, resulta em 1.2, e o ath.ceil, que deveria arredondar para 2 não funcionou, pois
+                                // a divisão de dois inteiros estava retornando um inteiro.
+                                // Então explicitamente convertir um dos valores para double e funcionou
+                                int qtdBotoesPaginacao = (int)Math.ceil((qtd / (double) qtdItemPerPage)) ; 
+                                pageContext.setAttribute("qtdBotoesPaginacao", qtdBotoesPaginacao);
+                                
+;                            %>
+                            <c:forEach var="i"  begin="1" end="${qtdBotoesPaginacao}" varStatus="pag">
+                                <a href="${pageContext.request.contextPath}/?pg=${i}" class="btn btn-info">${i}</a>
+                            
+                            </c:forEach>
+                        </div>
+                    </div>        
                     <hr>
 		
-
-	
 </body>
 
 </html>
