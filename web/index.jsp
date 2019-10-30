@@ -9,6 +9,10 @@
         <title>Home - Seja Bem vindo</title>
 
         <style>
+            .product-name {
+                font: 25px;
+            }
+            
             .carousel-inner img{
                 height: 50%;
             }
@@ -246,10 +250,9 @@
                 <article>
                     <img src="${initParam.imageFolder}produto${numberItem.count}.jpg" alt="S${product.name}">
                     <div class="text">
-                        <h3 class="card-title">${product.name}</h3>
+                        <a href="product?action=list&id=${product.id}" class="product-name">${product.name}</a>
                         <h4>${product.description}</h4>
-                        <h4 class="product-price"><b>R$${product.price}</b></h4>    
-
+                        <h4 class="product-price"><b>R$${product.price}</b></h4>
                         <button class="btn btn-add-to-cart">Adicionar ao carrinho</button>
                     </div>
                 </article>

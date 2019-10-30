@@ -20,7 +20,7 @@ import model.Product;
  *
  * @author Celestino
  */
-@WebServlet(name = "ProductController", urlPatterns = {"/produto/"})
+@WebServlet(name = "ProductController", urlPatterns = {"/product"})
 public class ProductController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest req, HttpServletResponse res)
@@ -75,15 +75,13 @@ public class ProductController extends HttpServlet {
         String action = req.getParameter("action");
         PrintWriter out = res.getWriter();
         if (req.getParameter("id") != null) {
-
             if ("".equals(req.getParameter("id"))) {
                 res.sendRedirect(getServletContext().getInitParameter("contextProject") + "produto/listar.jsp");
-
             } else {
                 productId = Long.parseLong(req.getParameter("id"));
             }
         }
-        
+
         switch (action) {
             case "register":
                 out.print("Entrou no case");
@@ -106,7 +104,10 @@ public class ProductController extends HttpServlet {
                 break;
 
             case "list":
-                out.print("Exibindo produto");
+                ProductDao productDao = new ProductDao();
+                Product product = productDao.getByProductId(Long.parseLong(req.getParameter("id")));
+                req.setAttribute("product", product);
+                req.getRequestDispatcher("product-page.jsp").forward(req, res);
                 break;
 
             case "listAll":
