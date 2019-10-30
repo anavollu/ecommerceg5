@@ -1,8 +1,9 @@
-
+<%@page import="model.User"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Product"%>
 <%@page import="dao.ProductDao"%>
+<%@page import="javax.servlet.http.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -41,7 +42,6 @@
     background: #0433FF;
     
 };
-
 .navbar-brand{
     font-weight: 600;
 }
@@ -60,9 +60,8 @@
     font-weight: 600;
     transition: 1s ease;
 }
-
 .navbar-nav .nav-item a:hover{
-    color: ;
+    color: silver;
 }
 .navbar-new-bottom{
     background-color: #fff;
@@ -76,21 +75,17 @@
     margin-right: 2%;
     color: black
 }
-
 .navbar-new-bottom .nav-item a {
     color: #000;
     font-size: 14px;
     font-weight: 600;
     transition: .2 ease;
 }
-
-
 .btn-add-to-cart{
     background-color: #3DADF2;
     color: white !important;
     
 }
-
 </style>
         
     <style>
@@ -105,7 +100,6 @@
         transition: .5s ease
     }
     .grid > article:hover{
-
         box-shadow: 0 0 20px #888;
     }
     .grid > article img {
@@ -132,31 +126,60 @@
         display: table-cell; 
         vertical-align: bottom
     }
+
 </style>
 	
 </head>
 
 <body class="container">
-   
     
-
-
+    <%
+        HttpSession sessao = request.getSession();
+        if(!(sessao.isNew() || (sessao.getAttribute("usuario_logado") == null) || sessao.getAttribute("usuario_logado") == "" )){
+            User user = (User) sessao.getAttribute("userRole");
+            
+        }
+        
+        
+        //sessao.invalidate();
+        //out.println(sessao.getAttribute("usuario_logado"));
+        //sessao.setAttribute("Usuario_logado", "1");
+        //sessao.removeAttribute("Usuario_logado");
+       // if (sessao.getAttribute("usuario_logado").equals("1")) {
+          //  out.println("<script>alert('"+ sessao.getAttribute("message")+"')</script>");
+       // }else{
+        //    out.println("<script>alert('Usuario não logado')</script>");
+       // }
+        
+    %>         
     <nav class="container navbar fixed-top navbar-expand-md flex-nowrap navbar-new-top">
         <a href="${pageContext.request.contextPath}" class="navbar-brand" title="Seu ecommerce"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""/></a>
         <ul class="nav navbar-nav mr-auto"></ul>
         <ul class="navbar-nav flex-row">
-            <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/account/profile.jsp" class="nav-link px-2" title="Acesse sua conta"><i class="far fa-2x fa-user-circle"></i></a>
-            </li>
-            
-            <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/logout/" class="nav-link px-2" title="Sair"><i class="fas fa-2x fa-sign-out-alt"></i></a>
-            </li>
+
+                <%
+                    
+                    if ((sessao.isNew() || (sessao.getAttribute("usuario_logado") == null) || sessao.getAttribute("usuario_logado") == "" )){
+                %>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/acesso.jsp" class="nav-link px-2" title="Acesse sua conta"><i class="far fa-2x fa-user-circle"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/create-user.jsp" class="nav-link px-2" title="Cadastre-se"><i class=" fas fa-2x fa-user-plus"></i></a>
+                    </li>
+                <% }else{ %>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/account/profile.jsp" class="nav-link px-2" title="Olá, ${sessionScope.username}"><i class="far fa-2x fa-user-circle"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${pageContext.request.contextPath}/logout/" class="nav-link px-2" title="Sair"><i class="fas fa-2x fa-sign-out-alt"></i></a>
+                    </li>
+                <%}%>
             <li class="nav-item">
                 <a class="nav-link px-2"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link px-2"></i></a>
+                <a class="nav-link px-2"></a>
             </li>
             <li class="nav-item">
                 <a href="${pageContext.request.contextPath}/carrinho/" class="btn btn-cart"> <i class="fas fa-2x fa-shopping-cart" aria-hidden="true"><span class="label-cart">${991}</span></i></a>
@@ -172,7 +195,7 @@
 
                 <ul class="navbar-nav w-100 justify-content-center px-3">
                     <li class="nav-item active">
-                        <a href="${pageContext.request.contextPath}"class="nav-link">Home <i class="fas fa-2x fa-home"></i></a>
+                        <a href="${pageContext.request.contextPath}" class="nav-link">Home <i class="fas fa-2x fa-home"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">Baixe o APP <i class="fas fa-2x fa-mobile-alt"></i></a>
@@ -191,20 +214,7 @@
             </div>
         </nav>
         
-		<!--<header class="header" >
-			<div class="header-top row">
-				<a href="${pageContext.request.contextPath}"><img id="logo" src="${pageContext.request.contextPath}/img/logo.png" /></a>
-
-				<div class="menu-link" >
-					<a href="" class="active">Home</a>
-					<a href="">Sobre</a>
-					<a href="">Artigos</a>
-					<a href="">Links</a>
-					<a href="carrinho.html">Carrinho</a>
-					<a href="">Login</a>
-				</div>
-			</div>
-		</header>-->
+		
 <br /> <br /><br /><br /> <br /><br />
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
@@ -268,14 +278,16 @@
                             <section class="grid">
                                 <c:forEach var="produto" items="${lista}" varStatus="numberItem" >
                                     <article>
-                                      <img src="${initParam.imageFolder}produto${numberItem.count}.jpg" alt="S${produto.name}">
-                                      <div class="text">
-                                        <h3 class="card-title">${produto.name}</h3>
-                                        <h4>${produto.description}</h4>
-                                        <h4 class="product-price"><b>R$${produto.price}</b></h4>    
                                         
-                                        <button class="btn btn-add-to-cart">Adicionar ao carrinho</button>
+                                            <img src="${initParam.imageFolder}produto${numberItem.count}.jpg" alt="S${produto.name}">
+                                            <div class="text">
+                                            <h3 class="card-title">${produto.name}</h3>
+                                            <h4>${produto.description}</h4>
+                                            <h4 class="product-price"><b>R$${produto.price}</b></h4>    
+
+                                            <a href="${pageContext.request.contextPath}/carrinho/meucarrinho.jsp?p=${produto.id}" class="btn btn-add-to-cart">COMPRAR</a>
                                       </div>
+                                        
                                     </article>
                                 </c:forEach>
                             </section>
@@ -317,7 +329,7 @@
                         </div>
                     </div>        
                     <hr>
-		
-</body>
 
+
+</body>
 </html>

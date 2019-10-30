@@ -5,6 +5,7 @@
  */
 package controller;
 
+
 import dao.ProductDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,7 +58,8 @@ public class ProductController extends HttpServlet {
             
             throws ServletException, IOException {
         
-        ProductDao prodDao = new  ProductDao();                                                                   
+        ProductDao prodDao = new  ProductDao(); 
+       
         prodDao.deleteByProductId(productId);                                                                   
         res.sendRedirect(getServletContext().getInitParameter("contextProject") + "produto/listar.jsp");
         
@@ -129,8 +131,6 @@ public class ProductController extends HttpServlet {
                 res.sendRedirect(req.getContextPath() + "/create-product.jsp"); 
                 break;       
         }
-        
-
         
     }
 

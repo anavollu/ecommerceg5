@@ -1,49 +1,32 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
+/**
+ *
+ * @author Celestino
+ */
 public class Cart {
+    private int cart_id, cart_user_id;
 
-    private User user;
-    private Date createdDate;
-    private final Map<Product, Integer> items = new HashMap<>();
-
-    public User getUser() {
-        return user;
+    public int getCart_id() {
+        return cart_id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public int getCart_user_id() {
+        return cart_user_id;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setCart_user_id(int cart_user_id) {
+        this.cart_user_id = cart_user_id;
     }
-
-    public Map<Product, Integer> getItems() {
-        return items;
-    }
-
-    public Map<Product, Integer> addItem(Product item, Integer quantity) {
-        Integer oldQt = this.items.get(item);
-        this.items.put(item, oldQt + quantity);
-        return this.items;
-    }
-
-    public Map<Product, Integer> removeItem(Product item, Integer quantity) {
-        this.items.remove(item);
-        return this.items;
-    }
-
-    public Map<Product, Integer> clearItems() {
-        this.items.clear();
-        return this.items;
-    }
-
+    
+    
 }

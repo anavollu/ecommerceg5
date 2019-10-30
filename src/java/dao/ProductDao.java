@@ -132,6 +132,27 @@ public class ProductDao extends BasicDao {
         }
         return list;
     }
+    public Product getProductById(int prod_id){
+        String sql = "SELECT * FROM product WHERE prod_id = ?";
+        Product prod = new Product();
+        try {
+            Statement st = this.con.createStatement();
+            
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                prod.setId(rs.getInt("prod_id"));
+                prod.setName(rs.getString("prod_name"));
+                prod.setPrice(rs.getDouble("prod_price"));
+                prod.setDescription(rs.getString("prod_description"));
+                prod.setImageUrl(rs.getString("prod_imageUrl"));
+                
+                
+            }
+        } catch (Exception erro) {
+             throw new RuntimeException("Erro ao obter o produto de id "+prod_id+": "+ erro.getMessage());
+        }
+        return prod;
+    }
     
     public ArrayList<Product> listarPaginacao(int pg, int qtd){
         int qtdProductsPerPage = qtd;

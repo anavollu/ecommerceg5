@@ -6,32 +6,37 @@ import java.util.Objects;
 
 public class User {
     public enum Role {
-        ADMIN,
-        USER
+        ONE("admin"),
+        TWO("user");
+        private final String name;
+        
+        Role(String s) {
+            name = s;
+        }
     }
 
-    private Long id;
+    private int id;
     private String cpf;
     private String email;
     private String fullName;
     private String username;
     private String password;
     private Date lastAccess;
-    private Role role; /*Papel: Adm ou usuário*/
-
-    public User(String cpf, String email, String fullName, String username, String password) {
+   // private Role role; /*Papel: Adm ou usuário*/
+    private String role;
+    /*public User(String cpf, String email, String fullName, String username, String password) {
         this.cpf = cpf;
         this.email = email;
         this.fullName = fullName;
         this.username = username;
         this.password = password;
-    }
+    }*/
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -83,11 +88,11 @@ public class User {
         this.lastAccess = lastAccess;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -138,10 +143,7 @@ public class User {
         if (!Objects.equals(this.lastAccess, other.lastAccess)) {
             return false;
         }
-        if (this.role != other.role) {
-            return false;
-        }
-        return true;
+        return this.role.equals(other.role);
     }
 
 }
