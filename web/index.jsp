@@ -250,7 +250,7 @@
                 <article>
                     <img src="${initParam.imageFolder}produto${numberItem.count}.jpg" alt="S${product.name}">
                     <div class="text">
-                        <a href="product?action=list&id=${product.id}" class="product-name">${product.name}</a>
+                        <a href="${pageContext.request.contextPath}/product?action=list&id=${product.id}" class="product-name">${product.name}</a>
                         <h4>${product.description}</h4>
                         <h4 class="product-price"><b>R$${product.price}</b></h4>
                         <button class="btn btn-add-to-cart">Adicionar ao carrinho</button>
